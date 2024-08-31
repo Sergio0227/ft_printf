@@ -1,0 +1,10 @@
+{
+	"files.associations": {
+		"*.ejs": "html",
+		"ft_printf.h": "c",
+		"cmath": "c",
+		"string_view": "c",
+		"array": "c",
+		"string": "c"
+	}
+}
