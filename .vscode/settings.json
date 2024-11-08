@@ -1,10 +1,11 @@
 {
 	"files.associations": {
-		"*.ejs": "html",
-		"ft_printf.h": "c",
-		"cmath": "c",
-		"string_view": "c",
-		"array": "c",
-		"string": "c"
+		"stdbool.h": "c",
+		"stdio.h": "c",
+		"color.h": "c",
+		"types.h": "c",
+		"unistd.h": "c",
+		"stdlib.h": "c",
+		"libftprintf.h": "c"
 	}
 }

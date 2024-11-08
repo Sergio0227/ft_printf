@@ -5,8 +5,8 @@
             "name": "C Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/main",
-            "args": [], // Args
+            "program": "${fileDirname}/printf",
+            "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
