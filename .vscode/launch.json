@@ -5,7 +5,7 @@
             "name": "C Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/main",
+            "program": "${workspaceFolder}/src_bonus/main",
             "args": [], // Args
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

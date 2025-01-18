@@ -6,11 +6,11 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:54:00 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/08/31 23:43:23 by sandre-a         ###   ########.fr       */
+/*   Updated: 2025/01/18 22:32:21 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 /*
 ** va_list: Declares a variable of type va_list to store information about
@@ -23,8 +23,7 @@
 ** va_end: Cleans up the variable argument list.
 */
 
-static void	check_specifier(char specifier, t_prtf *data);
-static void	check_flags(char specifier, t_prtf *data);
+static void	check_flags(char spec, t_prtf *data);
 static void	reset(t_prtf *data);
 static int	parse_input(t_prtf *data, const char *format);
 
@@ -39,7 +38,6 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			reset(&data);
 			new_pos = parse_input(&data, format++);
 			if (data.inval)
 			{
@@ -54,60 +52,49 @@ int	ft_printf(const char *format, ...)
 			data.length += ft_putchar(*format);
 		format++;
 	}
+	va_end(data.args);
 	return (data.length);
 }
+
 
 static int	parse_input(t_prtf *data, const char *format)
 {
 	char	*start;
 
+	reset(data);
 	start = (char *)format;
 	format++;
+	if (*format == 0)
+		return (0);
 	while (ft_strchr("0# +-", *format))
 		check_flags(*(format++), data);
 	if (ft_isdigit(*format))
 		data->width = ft_atoi(format);
 	while (ft_isdigit(*format) || *format == '.')
-		if (*(format++) == '.' && data->precision == 0)
+	{
+		if (*(format) == '.' && data->precision != -1)
+			break ;
+		if (*(format++) == '.' && data->precision == -1)
 			data->precision = ft_atoi(format);
+	}
 	if (!ft_strchr("cspdiuxX%", *format))
 		data->inval = start;
-	else
-		check_specifier(*format, data);
+	data->spec = *format;
+		buffer_string(*format, data);
 	return (format - start - 1);
 }
 
-static void	check_specifier(char specifier, t_prtf *data)
+static void	check_flags(char spec, t_prtf *data)
 {
-	if (specifier == 'c')
-		data->length += ft_putchar(va_arg(data->args, int));
-	if (specifier == 's')
-		data->length += ft_putstr(va_arg(data->args, char *));
-	if (specifier == 'p')
-		data->length += ft_putaddres(va_arg(data->args, unsigned long long));
-	if (specifier == 'd')
-		ft_putnbr(va_arg(data->args, int), data);
-	if (specifier == 'i')
-		ft_putnbr(va_arg(data->args, int), data);
-	if (specifier == 'u')
-		ft_putnbr(va_arg(data->args, unsigned int), data);
-	if (specifier == 'x' || specifier == 'X')
-		data->length += ft_puthex(va_arg(data->args, unsigned int), specifier);
-	if (specifier == '%')
-		data->length += ft_putchar('%');
-}
-
-static void	check_flags(char specifier, t_prtf *data)
-{
-	if (specifier == '0')
+	if (spec == '0')
 		data->flags.zero = true;
-	if (specifier == '#')
+	if (spec == '#')
 		data->flags.hashtag = true;
-	if (specifier == ' ')
+	if (spec == ' ')
 		data->flags.space = true;
-	if (specifier == '+')
+	if (spec == '+')
 		data->flags.plus = true;
-	if (specifier == '-')
+	if (spec == '-')
 		data->flags.minus = true;
 	return ;
 }
@@ -116,7 +103,7 @@ static void	reset(t_prtf *data)
 {
 	data->inval = NULL;
 	data->width = 0;
-	data->precision = 0;
+	data->precision = -1;
 	data->flags.hashtag = false;
 	data->flags.zero = false;
 	data->flags.space = false;

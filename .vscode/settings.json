@@ -5,6 +5,8 @@
 		"cmath": "c",
 		"string_view": "c",
 		"array": "c",
-		"string": "c"
+		"string": "c",
+		"random": "c",
+		"ostream": "cpp"
 	}
 }

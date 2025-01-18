@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/30 18:47:27 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/08/31 23:35:27 by sandre-a         ###   ########.fr       */
+/*   Created: 2024/08/30 20:10:56 by sandre-a          #+#    #+#             */
+/*   Updated: 2025/01/18 00:50:20 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
-#include <stdio.h>
+#include "../includes/ft_printf.h"
 
-int	main(void)
+int	ft_putchar(char c)
 {
-    int x = 5;
-   
-    ft_printf("% 10.5d",  40);
-    printf("\n");
-    printf("% 10.5d",  40);
+	write(1, &c, 1);
+	return (1);
 }
 
+int	ft_putstr(char *str)
+{
+	int	len;
+
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	len = 0;
+	while (str[len])
+		len += ft_putchar(str[len]);
+	return (len);
+}

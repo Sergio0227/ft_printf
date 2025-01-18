@@ -7,8 +7,8 @@
                 "args": [
                     "-fdiagnostics-color=always",
                     "-g",
-                    "${fileDirname}/*.c",
-                    "${fileDirname}/libft/*.c",
+                    "${workspaceFolder}/src_bonus/*.c",
+                    "${workspaceFolder}/libft/*.c",
                     "-o",
                     "main"
                 ],
