@@ -7,9 +7,9 @@ int	main(void)
 	int	d;
 	int	i;
 
-	printf(" % d ", 0);
+	printf("%d", printf("%-2ca", 0));
 	printf("\n");
-	ft_printf(" % d ", 0);
+	printf("%d", ft_printf("%-2ca", 0));
 
 	// ft_printf(" %-s ", "-");
 	return (0);
