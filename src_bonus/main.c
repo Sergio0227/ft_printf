@@ -7,9 +7,9 @@ int	main(void)
 	int	d;
 	int	i;
 
-	printf(" %2p ", -1);
+	printf(" % d ", 0);
 	printf("\n");
-	ft_printf(" %2p ", -1);
+	ft_printf(" % d ", 0);
 
 	// ft_printf(" %-s ", "-");
 	return (0);

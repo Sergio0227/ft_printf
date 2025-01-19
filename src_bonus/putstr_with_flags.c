@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 00:35:18 by sandre-a          #+#    #+#             */
-/*   Updated: 2025/01/18 23:05:36 by sandre-a         ###   ########.fr       */
+/*   Updated: 2025/01/19 02:32:24 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void	handle_width(t_prtf *data)
 	{
 		if (data->flags.zero)
 		{
-			if (ft_atoi(data->buffer) < 0 && data->spec != 'u')
+			if (ft_atol(data->buffer) < 0 && data->spec != 'u'
+				&& (ft_isdigit(*data->buffer) || *data->buffer == '-'))
 			{
 				data->length += ft_putchar('-');
 				while (remaining--)
@@ -62,11 +63,12 @@ static void	handle_precision(t_prtf *data)
 				data->length += ft_putchar('0');
 			remaining--;
 		}
+		return;
 	}
 	if (data->precision && data->precision < (int)ft_strlen(data->buffer))
-			data->buffer[data->precision] = 0;
-		else if (!data->precision)
-			data->buffer[0] = 0;
+		data->buffer[data->precision] = 0;
+	else if (!data->precision)
+		data->buffer[0] = 0;
 }
 
 void	putstr_with_flags(t_prtf *data)
@@ -75,23 +77,25 @@ void	putstr_with_flags(t_prtf *data)
 		handle_width(data);
 	else if (data->precision != -1)
 		handle_precision(data);
-	if (data->flags.plus)
+	else if (data->flags.plus)
+	{
 		if (((data->spec == 'i' || data->spec == 'd')
-				&& ft_atoi(data->buffer) >= 0) || data->spec == 'p')
+				&& ft_atol(data->buffer) >= 0) || data->spec == 'p')
 			data->length += ft_putchar('+');
-	if (data->flags.space && ft_atoi(data->buffer) > 0)
+	}
+	else if (data->flags.space && ft_atol(data->buffer) >= 0 && (data->width))
 		data->length += ft_putchar(' ');
-	if (data->flags.hashtag && data->spec == 'x' && data->buffer[0] != '0')
+	else if (data->flags.hashtag && data->spec == 'x' && data->buffer[0] != '0')
 		data->length += ft_putstr("0x");
 	else if (data->flags.hashtag && data->spec == 'X' && data->buffer[0] != '0')
 		data->length += ft_putstr("0X");
 	if (data->flags.zero && ft_atoi(data->buffer) < 0
 		&& data->width > (int)ft_strlen(data->buffer) && data->spec != 'u')
 		data->length += ft_putstr(data->buffer + 1);
-	if (data->precision && ft_atoi(data->buffer) < 0
+	else if (data->precision && ft_atoi(data->buffer) < 0
 		&& data->precision >= (int)ft_strlen(data->buffer) && data->spec != 'u')
 		data->length += ft_putstr(data->buffer + 1);
-	else if (!data->flags.minus && !data->flags.zero)
+	else if (!data->flags.minus)
 		data->length += ft_putstr(data->buffer);
 	free(data->buffer);
 	return ;
