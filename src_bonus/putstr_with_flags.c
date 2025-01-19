@@ -3,27 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   putstr_with_flags.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 00:35:18 by sandre-a          #+#    #+#             */
-/*   Updated: 2025/01/19 16:31:05 by sandre-a         ###   ########.fr       */
+/*   Updated: 2025/01/20 00:23:31 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void	handle_width(t_prtf *data)
+static void	handle_width(t_prtf *data, int remaining)
 {
-	int	remaining;
-
-	remaining = data->width - ft_strlen(data->buffer);
+	remaining = data->width - ft_strlen(data->buffer) + 1;
 	if (!*data->buffer && data->spec == 'c')
+	{
+		data->length += ft_putchar(data->buffer[0]);
 		remaining--;
+	}
 	if (data->flags.minus)
 		data->length += ft_putstr(data->buffer);
-	while (remaining > 0)
+	while (--remaining > 0)
 	{
-		if (data->flags.zero)
+		if 			(data->flags.zero)
 		{
 			if (ft_atol(data->buffer) < 0 && data->spec != 'u'
 				&& (ft_isdigit(*data->buffer) || *data->buffer == '-'))
@@ -37,14 +38,11 @@ static void	handle_width(t_prtf *data)
 		}
 		else
 			data->length += ft_putchar(' ');
-		remaining--;
 	}
 }
 
-static void	handle_precision(t_prtf *data)
+static void	handle_precision(t_prtf *data, int remaining)
 {
-	int	remaining;
-
 	remaining = data->precision - ft_strlen(data->buffer);
 	if (ft_atol(data->buffer) < 0 && data->spec != 'x' && data->spec != 'X')
 		remaining++;
@@ -72,9 +70,9 @@ static void	handle_precision(t_prtf *data)
 void	putstr_with_flags(t_prtf *d)
 {
 	if (d->width || (!d->width && d->flags.minus))
-		handle_width(d);
+		handle_width(d, 0);
 	else if (d->precision != -1)
-		handle_precision(d);
+		handle_precision(d, 0);
 	else if (d->flags.plus && (((d->spec == 'i' || d->spec == 'd')
 				&& ft_atol(d->buffer) >= 0) || d->spec == 'p'))
 		d->length += ft_putchar('+');
