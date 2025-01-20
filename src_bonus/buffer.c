@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buffer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 23:39:46 by sandre-a          #+#    #+#             */
-/*   Updated: 2025/01/18 22:32:28 by sandre-a         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:40:20 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ void	buffer_string(char spec, t_prtf *data)
 		buffer_hex(va_arg(data->args, unsigned int), "0123456789ABCDEF", data,
 			false);
 	if (spec == '%')
-	 	buffer_char('%', data);
+		buffer_char('%', data);
 	putstr_with_flags(data);
 }

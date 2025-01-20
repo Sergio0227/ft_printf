@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:54:00 by sandre-a          #+#    #+#             */
-/*   Updated: 2025/01/17 23:57:51 by sandre-a         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:41:43 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,3 @@ static void	check_specifier(char specifier, t_prtf *data)
 	if (specifier == '%')
 		data->length += ft_putchar('%');
 }
-
-

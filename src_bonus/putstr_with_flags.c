@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 00:35:18 by sandre-a          #+#    #+#             */
-/*   Updated: 2025/01/20 00:23:31 by sergio           ###   ########.fr       */
+/*   Updated: 2025/01/20 16:40:49 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	handle_width(t_prtf *data, int remaining)
 		data->length += ft_putstr(data->buffer);
 	while (--remaining > 0)
 	{
-		if 			(data->flags.zero)
+		if (data->flags.zero)
 		{
 			if (ft_atol(data->buffer) < 0 && data->spec != 'u'
 				&& (ft_isdigit(*data->buffer) || *data->buffer == '-'))

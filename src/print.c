@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:10:56 by sandre-a          #+#    #+#             */
-/*   Updated: 2025/01/17 23:58:46 by sandre-a         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:42:30 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_putnbr(long nbr, t_prtf *data)
 	else
 		data->length += ft_putchar(nbr % 10 + 48);
 }
+
 int	ft_putaddres(unsigned long long address)
 {
 	int	count;

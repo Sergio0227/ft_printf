@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:54:00 by sandre-a          #+#    #+#             */
-/*   Updated: 2025/01/18 22:32:21 by sandre-a         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:40:48 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	ft_printf(const char *format, ...)
 	return (data.length);
 }
 
-
 static int	parse_input(t_prtf *data, const char *format)
 {
 	char	*start;
@@ -80,7 +79,7 @@ static int	parse_input(t_prtf *data, const char *format)
 	if (!ft_strchr("cspdiuxX%", *format))
 		data->inval = start;
 	data->spec = *format;
-		buffer_string(*format, data);
+	buffer_string(*format, data);
 	return (format - start - 1);
 }
 

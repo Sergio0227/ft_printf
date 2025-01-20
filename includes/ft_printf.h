@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:47:30 by sandre-a          #+#    #+#             */
-/*   Updated: 2025/01/18 22:32:38 by sandre-a         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:40:37 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,12 @@ typedef struct s_prtf
 int			ft_printf(const char *format, ...);
 int			ft_putchar(char c);
 int			ft_putstr(char *str);
-void 		ft_putnbr(long nbr, t_prtf *data);
+void		ft_putnbr(long nbr, t_prtf *data);
 int			ft_putaddres(unsigned long long address);
 int			ft_puthex(unsigned long long num, char *case_type);
 
-//BONUS
-void	buffer_string(char specifier, t_prtf *data);
-void	putstr_with_flags(t_prtf *data);
-
+// BONUS
+void		buffer_string(char specifier, t_prtf *data);
+void		putstr_with_flags(t_prtf *data);
 
 #endif
